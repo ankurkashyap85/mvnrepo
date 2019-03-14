@@ -1,9 +1,9 @@
 
  stage("Create new tag") {
-         when {
-               expression {env.BRANCH_NAME == 'master'}
-            }                     
-            steps {
+         
+               if(env.BRANCH_NAME == 'master')
+			   {
+			   steps {
              sshagent (credentials: ['test-git-tag'])                        
                 {
                 script {
@@ -13,13 +13,28 @@
                         def semVerLib = load 'SemVer.groovy'
                         def version = semVerLib.getTagversion(tag)
                         println version
-                                 when {
-               expression {env.BRANCH_NAME == 'master'}
-            }  
-		  }   
-		} 
-	  }             
-            steps {
+						
+						}
+						}
+						}
+			   
+			   }
+			   
+			   
+                                 
+            
+						
+						
+						
+						
+						
+						
+						
+                           
+               if (env.BRANCH_NAME == 'master')
+			   {
+			   
+			     steps {
              sshagent (credentials: ['test-git-tag'])                        
                 {
                 script {
@@ -41,4 +56,8 @@
               }
                 
             }
+			   
+			   }
+            
+            
         } 
